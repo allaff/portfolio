@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dev Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="logo">&lt;Dev/&gt;</div>
+        <ul class="nav-links">
+            <li><a href="#about" data-i18n="nav_about">Sobre</a></li>
+            <li><a href="#projects" data-i18n="nav_projects">Projetos</a></li>
+            <li><a href="#certificates" data-i18n="nav_cert">Certificados</a></li>
+            <li><a href="#contact" data-i18n="nav_contact">Contato</a></li>
+        </ul>
+        <div class="controls">
+            <button id="lang-toggle" class="btn-icon">🇺🇸 EN</button>
+            <button id="theme-toggle" class="btn-icon">🌙</button>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1 data-i18n="hero_title">Olá, eu crio soluções digitais.</h1>
+            <p data-i18n="hero_subtitle">Desenvolvedor Full Stack focado em performance e design.</p>
+            <a href="#projects" class="btn-primary" data-i18n="hero_cta">Ver Projetos</a>
+        </div>
+    </header>
+
+    <section id="about" class="container">
+        <h2 data-i18n="about_title">Sobre Mim</h2>
+        <p data-i18n="about_text">Sou apaixonado por tecnologia e programação. Transformo ideias complexas em código
+            limpo e eficiente.</p>
+    </section>
+
+    <section id="projects" class="container">
+        <h2 data-i18n="projects_title">Projetos</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>E-commerce Tech</h3>
+                <p>HTML, CSS, JS</p>
+                <div class="card-links">
+                    <a href="#">Repo</a>
+                    <a href="#">Demo</a>
+                </div>
+            </div>
+            <div class="card">
+                <h3>Dashboard API</h3>
+                <p>React, Node.js</p>
+                <div class="card-links">
+                    <a href="#">Repo</a>
+                    <a href="#">Demo</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="certificates" class="container">
+        <h2 data-i18n="cert_title">Certificados</h2>
+        <ul class="cert-list">
+            <li>AWS Cloud Practitioner</li>
+            <li>JavaScript Advanced - Udemy</li>
+            <li>Scrum Foundation</li>
+        </ul>
+    </section>
+
+    <section id="contact" class="container">
+        <h2 data-i18n="contact_title">Contato</h2>
+        <p data-i18n="contact_text">Vamos trabalhar juntos? Me mande um email.</p>
+        <a href="mailto:email@exemplo.com" class="btn-primary">email@exemplo.com</a>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Dev Portfolio.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
