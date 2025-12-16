@@ -12,16 +12,61 @@
     ],
     "projects": [
         {
-            "title": "E-commerce Tech",
-            "tech": "HTML, CSS, JS",
-            "repo": "https://github.com/allaff/repo1",
+            "title": "Tech Pharma",
+            "tech": "Java, Spring Boot",
+            "repo": "https://github.com/allaff/CRUD_JAVA",
             "demo": "https://demo.com"
         },
         {
-            "title": "Dashboard API",
-            "tech": "React, Node.js",
-            "repo": "https://github.com/allaff/repo2",
-            "demo": "https://demo.com"
+            "title": "IMDB Clone",
+            "tech": "Html, css, javascript, bootstrap",
+            "repo": "https://github.com/allaff/IMDB-Clone",
+            "demo": "https://allaff.github.io/IMDB-Clone/"
+        },
+        {
+            "title": "School Jazz",
+            "tech": "Html, css, javascript",
+            "repo": "https://github.com/allaff/School-Jazz",
+            "demo": "https://allaff.github.io/School-Jazz/"
+        },
+        {
+            "title": "Relógio",
+            "tech": "Html, css, javascript",
+            "repo": "https://github.com/allaff/Projeto-Relogio",
+            "demo": "https://allaff.github.io/Projeto-Relogio/"
+        },
+        {
+            "title": "Formulário Simples",
+            "tech": "Html, css, javascript",
+            "repo": "https://github.com/allaff/formulario_simples",
+            "demo": "https://allaff.github.io/formulario_simples/"
+        },
+        {
+            "title": "Site escolar",
+            "tech": "Html, css, javascript",
+            "repo": "https://github.com/allaff/projetinho_tsi",
+            "demo": "https://allaff.github.io/projetinho_tsi/"
+        },
+
+        {
+            "title": "Lanchonete",
+            "tech": "Html, css, javascript",
+            "repo": "https://github.com/allaff/projeto_lanchonete",
+            "demo": "https://allaff.github.io/projeto_lanchonete/"
+        },
+
+        {
+            "title": "e-commerce Sports",
+            "tech": "Html, css, javascript",
+            "repo": "https://github.com/allaff/amsp_sports",
+            "demo": "https://allaff.github.io/amsp_sports/"
+        },
+
+        {
+            "title": "Tech Pharma",
+            "tech": "Python, Django, IA, Javascript",
+            "repo": "https://github.com/allaff/techstore-bot",
+            "demo": "https://techstore-bot.onrender.com"
         }
     ]
 }
