@@ -100,11 +100,15 @@ body {
 }
 
 .hero h1 {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-    background: linear-gradient(90deg, var(--text-color), var(--accent-color));
+    font-size: 4rem;
+    /* Maior para impacto */
+    line-height: 1.1;
+    font-weight: 800;
+    letter-spacing: -2px;
+    background: linear-gradient(135deg, var(--text-color) 30%, var(--accent-color));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    margin-bottom: 1.5rem;
 }
 
 /* Botões */
@@ -150,14 +154,19 @@ h2 {
 
 .card {
     background: var(--card-bg);
-    padding: 2rem;
-    border-radius: 10px;
     border: 1px solid rgba(128, 128, 128, 0.1);
-    transition: var(--transition);
+    border-radius: 16px;
+    /* Bordas mais arredondadas e modernas */
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
     border-color: var(--accent-color);
 }
 
@@ -165,6 +174,17 @@ h2 {
     list-style: none;
     padding: 0.5rem 0;
     border-bottom: 1px solid rgba(128, 128, 128, 0.2);
+}
+
+.tech-tag {
+    display: inline-block;
+    padding: 0.2rem 0.8rem;
+    background: rgba(37, 99, 235, 0.1);
+    color: var(--accent-color);
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-right: 5px;
 }
 
 /* Responsivo */

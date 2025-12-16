@@ -87,17 +87,24 @@ initSite();
 
 function renderProjects() {
     const grid = document.getElementById('projects-grid');
-    grid.innerHTML = ""; // Limpa a grade antes de preencher
+    grid.innerHTML = "";
 
     siteData.projects.forEach(proj => {
+        // Transforma "HTML, CSS" em tags individuais
+        const techTags = proj.tech.split(',').map(t =>
+            `<span class="tech-tag">${t.trim()}</span>`
+        ).join('');
+
         const card = document.createElement('div');
         card.className = 'card';
         card.innerHTML = `
-            <h3>${proj.title}</h3>
-            <p>${proj.tech}</p>
-            <div class="card-links">
-                <a href="${proj.repo}" target="_blank">Repo</a>
-                <a href="${proj.demo}" target="_blank">Demo</a>
+            <div class="card-content">
+                <h3>${proj.title}</h3>
+                <div class="tech-container">${techTags}</div>
+                <div class="card-links">
+                    <a href="${proj.repo}" class="btn-secondary" target="_blank">Código</a>
+                    <a href="${proj.demo}" class="btn-primary" target="_blank">Demo</a>
+                </div>
             </div>
         `;
         grid.appendChild(card);
