@@ -1,15 +1,12 @@
-// Dicionário de Traduções
+// Dicionário de Traduções (Mantemos aqui para rapidez de resposta)
 const translations = {
     pt: {
         nav_about: "Sobre",
         nav_projects: "Projetos",
         nav_cert: "Certificados",
         nav_contact: "Contato",
-        hero_title: "Olá, eu crio soluções digitais.",
-        hero_subtitle: "Desenvolvedor Full Stack focado em performance e design.",
         hero_cta: "Ver Projetos",
         about_title: "Sobre Mim",
-        about_text: "Sou apaixonado por tecnologia e programação. Transformo ideias complexas em código limpo e eficiente.",
         projects_title: "Projetos",
         cert_title: "Certificados",
         contact_title: "Contato",
@@ -20,11 +17,8 @@ const translations = {
         nav_projects: "Projects",
         nav_cert: "Certificates",
         nav_contact: "Contact",
-        hero_title: "Hello, I create digital solutions.",
-        hero_subtitle: "Full Stack Developer focused on performance and design.",
         hero_cta: "View Projects",
         about_title: "About Me",
-        about_text: "I am passionate about technology and coding. I turn complex ideas into clean, efficient code.",
         projects_title: "Projects",
         cert_title: "Certificates",
         contact_title: "Contact",
@@ -32,51 +26,82 @@ const translations = {
     }
 };
 
-// Elementos
-const langToggleBtn = document.getElementById('lang-toggle');
-const themeToggleBtn = document.getElementById('theme-toggle');
-const body = document.body;
-
-// Estado inicial
 let currentLang = 'pt';
+let siteData = null;
 
-// Função para atualizar textos
+// Função principal para carregar o JSON e iniciar o site
+async function initSite() {
+    try {
+        const response = await fetch('data.json');
+        siteData = await response.json();
+
+        renderProfile();
+        setupEventListeners();
+    } catch (error) {
+        console.error("Erro ao carregar dados:", error);
+    }
+}
+
+// Preenche o HTML com os dados do JSON
+function renderProfile() {
+    if (!siteData) return;
+
+    document.getElementById('hero-name').textContent = `Olá, eu sou o ${siteData.profile.name}`;
+    document.getElementById('about-text').textContent = siteData.profile.about;
+
+    const emailBtn = document.getElementById('contact-email');
+    emailBtn.textContent = siteData.profile.email;
+    emailBtn.href = `mailto:${siteData.profile.email}`;
+}
+
+// Troca de idioma
 function updateLanguage(lang) {
     document.querySelectorAll('[data-i18n]').forEach(element => {
         const key = element.getAttribute('data-i18n');
-        element.textContent = translations[lang][key];
-    });
-
-    // Atualiza botão
-    langToggleBtn.textContent = lang === 'pt' ? '🇺🇸 EN' : '🇧🇷 PT';
-}
-
-// Event Listener: Troca de Idioma
-langToggleBtn.addEventListener('click', () => {
-    currentLang = currentLang === 'pt' ? 'en' : 'pt';
-    updateLanguage(currentLang);
-});
-
-// Event Listener: Tema (Dark/Light)
-themeToggleBtn.addEventListener('click', () => {
-    body.classList.toggle('dark-mode');
-    const isDark = body.classList.contains('dark-mode');
-    themeToggleBtn.textContent = isDark ? '☀️' : '🌙';
-});
-
-// Efeito simples de Scroll Reveal (Opcional - Toque de atenção)
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = 1;
-            entry.target.style.transform = 'translateY(0)';
+        if (translations[lang][key]) {
+            element.textContent = translations[lang][key];
         }
     });
-});
 
-document.querySelectorAll('section').forEach(section => {
-    section.style.opacity = 0;
-    section.style.transform = 'translateY(20px)';
-    section.style.transition = 'all 0.6s ease-out';
-    observer.observe(section);
-});
+    // Atualiza o botão de idioma
+    document.getElementById('lang-toggle').textContent = lang === 'pt' ? '🇺🇸 EN' : '🇧🇷 PT';
+}
+
+function setupEventListeners() {
+    // Evento Idioma
+    document.getElementById('lang-toggle').addEventListener('click', () => {
+        currentLang = currentLang === 'pt' ? 'en' : 'pt';
+        updateLanguage(currentLang);
+    });
+
+    // Evento Tema Dark
+    document.getElementById('theme-toggle').addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+        const isDark = document.body.classList.contains('dark-mode');
+        document.getElementById('theme-toggle').textContent = isDark ? '☀️' : '🌙';
+    });
+}
+
+// Inicializa tudo
+initSite();
+
+function renderProjects() {
+    const grid = document.getElementById('projects-grid');
+    grid.innerHTML = ""; // Limpa a grade antes de preencher
+
+    siteData.projects.forEach(proj => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+            <h3>${proj.title}</h3>
+            <p>${proj.tech}</p>
+            <div class="card-links">
+                <a href="${proj.repo}" target="_blank">Repo</a>
+                <a href="${proj.demo}" target="_blank">Demo</a>
+            </div>
+        `;
+        grid.appendChild(card);
+    });
+}
+
+// Não esqueças de chamar renderProjects() dentro da função initSite() logo após renderProfile()!
