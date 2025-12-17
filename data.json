@@ -63,7 +63,7 @@
         },
 
         {
-            "title": "Tech Pharma",
+            "title": "Chat bot",
             "tech": "Python, Django, IA, Javascript",
             "repo": "https://github.com/allaff/techstore-bot",
             "demo": "https://techstore-bot.onrender.com"
