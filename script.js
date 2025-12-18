@@ -19,28 +19,27 @@ let siteData = null;
 async function initSite() {
     try {
         const response = await fetch('data.json');
-        if (!response.ok) throw new Error("Erro ao carregar data.json");
         siteData = await response.json();
-
         renderProfile();
-        renderProjects(); // Agora será chamado corretamente!
+        renderProjects();
         setupEventListeners();
-    } catch (error) {
-        console.error("Erro crítico:", error);
-    }
+    } catch (e) { console.error("Erro ao carregar dados:", e); }
 }
 
 function renderProfile() {
     if (!siteData) return;
-    const heroName = document.getElementById('hero-name');
-    const aboutText = document.getElementById('about-text');
-    const emailBtn = document.getElementById('contact-email');
+    const profile = siteData.profile;
+    const langData = profile[currentLang];
 
-    if (heroName) heroName.textContent = `Olá, eu sou o ${siteData.profile.name}`;
-    if (aboutText) aboutText.textContent = siteData.profile.about;
-    if (emailBtn) {
-        emailBtn.textContent = siteData.profile.email;
-        emailBtn.href = `mailto:${siteData.profile.email}`;
+    const nameEl = document.getElementById('hero-name');
+    const aboutEl = document.getElementById('about-text');
+    const emailEl = document.getElementById('contact-email');
+
+    if (nameEl) nameEl.textContent = `Olá, eu sou o ${profile.name}`;
+    if (aboutEl) aboutEl.textContent = langData.about;
+    if (emailEl) {
+        emailEl.textContent = profile.email;
+        emailEl.href = `mailto:${profile.email}`;
     }
 }
 
@@ -48,45 +47,38 @@ function renderProjects() {
     const grid = document.getElementById('projects-grid');
     if (!grid || !siteData.projects) return;
 
-    grid.innerHTML = "";
-    siteData.projects.forEach(proj => {
-        const techTags = proj.tech.split(',').map(t =>
-            `<span class="tech-tag">${t.trim()}</span>`
-        ).join('');
-
-        const card = document.createElement('div');
-        card.className = 'card';
-        card.innerHTML = `
+    grid.innerHTML = siteData.projects.map(proj => `
+        <div class="card">
             <h3>${proj.title}</h3>
-            <div class="tech-container">${techTags}</div>
+            <div class="tech-container">
+                ${proj.tech.split(',').map(t => `<span class="tech-tag">${t.trim()}</span>`).join('')}
+            </div>
             <div class="card-links">
                 <a href="${proj.repo}" class="btn-secondary" target="_blank">Código</a>
                 <a href="${proj.demo}" class="btn-primary" target="_blank">Demo</a>
             </div>
-        `;
-        grid.appendChild(card);
-    });
-}
-
-function setupEventListeners() {
-    document.getElementById('lang-toggle').addEventListener('click', () => {
-        currentLang = currentLang === 'pt' ? 'en' : 'pt';
-        updateLanguage(currentLang);
-    });
-
-    document.getElementById('theme-toggle').addEventListener('click', () => {
-        document.body.classList.toggle('dark-mode');
-        const isDark = document.body.classList.contains('dark-mode');
-        document.getElementById('theme-toggle').textContent = isDark ? '☀️' : '🌙';
-    });
+        </div>
+    `).join('');
 }
 
 function updateLanguage(lang) {
-    document.querySelectorAll('[data-i18n]').forEach(element => {
-        const key = element.getAttribute('data-i18n');
-        if (translations[lang][key]) element.textContent = translations[lang][key];
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[lang][key]) el.textContent = translations[lang][key];
     });
+    renderProfile();
     document.getElementById('lang-toggle').textContent = lang === 'pt' ? '🇺🇸 EN' : '🇧🇷 PT';
+}
+
+function setupEventListeners() {
+    document.getElementById('lang-toggle').onclick = () => {
+        currentLang = currentLang === 'pt' ? 'en' : 'pt';
+        updateLanguage(currentLang);
+    };
+    document.getElementById('theme-toggle').onclick = () => {
+        document.body.classList.toggle('dark-mode');
+        document.getElementById('theme-toggle').textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+    };
 }
 
 initSite();
