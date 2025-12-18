@@ -9,18 +9,21 @@ let siteData = null;
 async function initSite() {
     try {
         const response = await fetch('data.json');
+        if (!response.ok) throw new Error('Não foi possível carregar o data.json');
         siteData = await response.json();
         renderProfile();
         renderProjects();
         setupEventListeners();
-    } catch (e) { console.error("Falha ao iniciar site:", e); }
+    } catch (e) {
+        console.error("Erro crítico ao carregar dados:", e);
+    }
 }
 
 function renderProfile() {
     if (!siteData || !siteData.profile) return;
     const profile = siteData.profile;
 
-    // Fallback: se não houver tradução no JSON, usa o que existir
+    // CORREÇÃO: Fallback robusto para evitar o erro de undefined
     const langData = profile[currentLang] || profile.pt || {};
 
     const nameEl = document.getElementById('hero-name');
@@ -28,7 +31,7 @@ function renderProfile() {
     const emailEl = document.getElementById('contact-email');
 
     if (nameEl) nameEl.textContent = `Olá, eu sou o ${profile.name}`;
-    if (aboutEl) aboutEl.textContent = langData.about || "";
+    if (aboutEl) aboutEl.textContent = langData.about || "Texto não disponível.";
     if (emailEl) {
         emailEl.textContent = profile.email;
         emailEl.href = `mailto:${profile.email}`;
@@ -66,15 +69,19 @@ function setupEventListeners() {
     const langBtn = document.getElementById('lang-toggle');
     const themeBtn = document.getElementById('theme-toggle');
 
-    if (langBtn) langBtn.onclick = () => {
-        currentLang = currentLang === 'pt' ? 'en' : 'pt';
-        updateLanguage(currentLang);
-    };
+    if (langBtn) {
+        langBtn.onclick = () => {
+            currentLang = currentLang === 'pt' ? 'en' : 'pt';
+            updateLanguage(currentLang);
+        };
+    }
 
-    if (themeBtn) themeBtn.onclick = () => {
-        document.body.classList.toggle('dark-mode');
-        themeBtn.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
-    };
+    if (themeBtn) {
+        themeBtn.onclick = () => {
+            document.body.classList.toggle('dark-mode');
+            themeBtn.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+        };
+    }
 }
 
 initSite();

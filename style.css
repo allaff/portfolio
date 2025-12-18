@@ -26,6 +26,7 @@ body {
     color: var(--text-color);
     transition: 0.3s;
     line-height: 1.6;
+    padding-top: 80px;
 }
 
 .navbar {
@@ -55,13 +56,13 @@ body {
 }
 
 .container {
-    padding: 6rem 2rem 4rem;
+    padding: 4rem 2rem;
     max-width: 1100px;
     margin: 0 auto;
 }
 
 .hero {
-    height: 80vh;
+    min-height: 70vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -70,14 +71,14 @@ body {
 }
 
 .hero h1 {
-    font-size: 3.5rem;
+    font-size: clamp(2.5rem, 8vw, 4rem);
     font-weight: 800;
     margin-bottom: 1rem;
 }
 
 .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 2rem;
     margin-top: 2rem;
 }
@@ -87,12 +88,13 @@ body {
     padding: 1.5rem;
     border-radius: 12px;
     border: 1px solid rgba(0, 0, 0, 0.05);
-    transition: 0.3s;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s;
 }
 
 .card:hover {
     transform: translateY(-5px);
-    border-color: var(--accent-color);
 }
 
 .tech-tag {
@@ -109,7 +111,8 @@ body {
 .card-links {
     display: flex;
     gap: 10px;
-    margin-top: 1.5rem;
+    margin-top: auto;
+    padding-top: 1.5rem;
 }
 
 .btn-primary,
@@ -147,5 +150,9 @@ footer {
 
     .hero h1 {
         font-size: 2.2rem;
+    }
+
+    .container {
+        padding: 2rem 1rem;
     }
 }
