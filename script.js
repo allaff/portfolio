@@ -1,16 +1,6 @@
 const translations = {
-    pt: {
-        nav_about: "Sobre", nav_projects: "Projetos", nav_cert: "Certificados",
-        nav_contact: "Contato", hero_cta: "Ver Projetos", about_title: "Sobre Mim",
-        projects_title: "Projetos", cert_title: "Certificados",
-        contact_title: "Contato", contact_text: "Vamos trabalhar juntos? Me mande um email."
-    },
-    en: {
-        nav_about: "About", nav_projects: "Projects", nav_cert: "Certificates",
-        nav_contact: "Contact", hero_cta: "View Projects", about_title: "About Me",
-        projects_title: "Projects", cert_title: "Certificates",
-        contact_title: "Contact", contact_text: "Let's work together? Send me an email."
-    }
+    pt: { nav_about: "Sobre", nav_projects: "Projetos", nav_cert: "Certificados", nav_contact: "Contato", hero_cta: "Ver Projetos", about_title: "Sobre Mim", projects_title: "Projetos", cert_title: "Certificados", contact_title: "Contato", contact_text: "Vamos trabalhar juntos? Me mande um email." },
+    en: { nav_about: "About", nav_projects: "Projects", nav_cert: "Certificates", nav_contact: "Contact", hero_cta: "View Projects", about_title: "About Me", projects_title: "Projects", cert_title: "Certificates", contact_title: "Contact", contact_text: "Let's work together? Send me an email." }
 };
 
 let currentLang = 'pt';
@@ -23,20 +13,22 @@ async function initSite() {
         renderProfile();
         renderProjects();
         setupEventListeners();
-    } catch (e) { console.error("Erro ao carregar dados:", e); }
+    } catch (e) { console.error("Falha ao iniciar site:", e); }
 }
 
 function renderProfile() {
-    if (!siteData) return;
+    if (!siteData || !siteData.profile) return;
     const profile = siteData.profile;
-    const langData = profile[currentLang];
+
+    // Fallback: se não houver tradução no JSON, usa o que existir
+    const langData = profile[currentLang] || profile.pt || {};
 
     const nameEl = document.getElementById('hero-name');
     const aboutEl = document.getElementById('about-text');
     const emailEl = document.getElementById('contact-email');
 
     if (nameEl) nameEl.textContent = `Olá, eu sou o ${profile.name}`;
-    if (aboutEl) aboutEl.textContent = langData.about;
+    if (aboutEl) aboutEl.textContent = langData.about || "";
     if (emailEl) {
         emailEl.textContent = profile.email;
         emailEl.href = `mailto:${profile.email}`;
@@ -45,12 +37,12 @@ function renderProfile() {
 
 function renderProjects() {
     const grid = document.getElementById('projects-grid');
-    if (!grid || !siteData.projects) return;
+    if (!grid || !siteData || !siteData.projects) return;
 
     grid.innerHTML = siteData.projects.map(proj => `
         <div class="card">
             <h3>${proj.title}</h3>
-            <div class="tech-container">
+            <div style="margin: 10px 0;">
                 ${proj.tech.split(',').map(t => `<span class="tech-tag">${t.trim()}</span>`).join('')}
             </div>
             <div class="card-links">
@@ -71,13 +63,17 @@ function updateLanguage(lang) {
 }
 
 function setupEventListeners() {
-    document.getElementById('lang-toggle').onclick = () => {
+    const langBtn = document.getElementById('lang-toggle');
+    const themeBtn = document.getElementById('theme-toggle');
+
+    if (langBtn) langBtn.onclick = () => {
         currentLang = currentLang === 'pt' ? 'en' : 'pt';
         updateLanguage(currentLang);
     };
-    document.getElementById('theme-toggle').onclick = () => {
+
+    if (themeBtn) themeBtn.onclick = () => {
         document.body.classList.toggle('dark-mode');
-        document.getElementById('theme-toggle').textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+        themeBtn.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
     };
 }
 

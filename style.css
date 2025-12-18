@@ -1,10 +1,9 @@
 :root {
     --bg-color: #ffffff;
     --text-color: #1a1a1a;
-    --card-bg: #f4f4f5;
+    --card-bg: #f8f9fa;
     --accent-color: #2563eb;
     --nav-bg: rgba(255, 255, 255, 0.9);
-    --transition: all 0.3s ease;
 }
 
 body.dark-mode {
@@ -19,13 +18,13 @@ body.dark-mode {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
 }
 
 body {
-    font-family: 'Inter', sans-serif;
-    background-color: var(--bg-color);
+    background: var(--bg-color);
     color: var(--text-color);
-    transition: var(--transition);
+    transition: 0.3s;
     line-height: 1.6;
 }
 
@@ -40,7 +39,7 @@ body {
     background: var(--nav-bg);
     backdrop-filter: blur(10px);
     z-index: 1000;
-    border-bottom: 1px solid rgba(128, 128, 128, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .nav-links {
@@ -55,40 +54,45 @@ body {
     font-weight: 600;
 }
 
+.container {
+    padding: 6rem 2rem 4rem;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
 .hero {
-    height: 100vh;
+    height: 80vh;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
 }
 
 .hero h1 {
-    font-size: 4rem;
+    font-size: 3.5rem;
     font-weight: 800;
-    margin-bottom: 1.5rem;
-}
-
-.container {
-    padding: 4rem 2rem;
-    max-width: 1100px;
-    margin: 0 auto;
+    margin-bottom: 1rem;
 }
 
 .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
+    margin-top: 2rem;
 }
 
 .card {
     background: var(--card-bg);
     padding: 1.5rem;
-    border-radius: 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    border: 1px solid rgba(128, 128, 128, 0.1);
+    border-radius: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent-color);
 }
 
 .tech-tag {
@@ -96,24 +100,27 @@ body {
     padding: 0.2rem 0.6rem;
     background: rgba(37, 99, 235, 0.1);
     color: var(--accent-color);
-    border-radius: 50px;
-    font-size: 0.8rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
     margin: 2px;
+    font-weight: bold;
 }
 
 .card-links {
     display: flex;
     gap: 10px;
-    margin-top: auto;
+    margin-top: 1.5rem;
 }
 
 .btn-primary,
 .btn-secondary {
     padding: 0.6rem 1.2rem;
-    border-radius: 8px;
+    border-radius: 6px;
     text-decoration: none;
     font-weight: 600;
+    font-size: 0.9rem;
     text-align: center;
+    flex: 1;
 }
 
 .btn-primary {
@@ -122,15 +129,15 @@ body {
 }
 
 .btn-secondary {
-    border: 2px solid var(--accent-color);
+    border: 1px solid var(--accent-color);
     color: var(--accent-color);
 }
 
 footer {
     padding: 3rem;
     text-align: center;
-    background: var(--card-bg);
-    margin-top: 4rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    margin-top: 5rem;
 }
 
 @media (max-width: 768px) {
@@ -139,6 +146,6 @@ footer {
     }
 
     .hero h1 {
-        font-size: 2.5rem;
+        font-size: 2.2rem;
     }
 }
