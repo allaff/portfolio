@@ -1,12 +1,19 @@
 {
-    "profile": {
-        "name": "Allaff",
+   "profile": {
+    "name": "Allaff",
+    "email": "allaffgustavo@gmail.com",
+    "linkedin": "https://linkedin.com/in/allaff",
+    "github": "https://github.com/allaff",
+    "pt": {
         "role": "Desenvolvedor Full Stack",
-        "about": "Desenvolvedor de Software com foco em Backend, apaixonado por transformar lógica complexa em aplicações eficientes e escaláveis. A minha experiência prática com Python e Django permite-me construir arquiteturas robustas e APIs RESTful, sempre com atenção à qualidade do código e performance. Tenho também competências em Frontend (React), o que me dá uma visão completa do ciclo de desenvolvimento (Full Stack). A minha formação técnica no IFPB deu-me a base sólida em lógica de programação, e a minha atuação como freelancer desenvolveu a minha autonomia e capacidade de resolver problemas reais de negócio. O meu objetivo é integrar equipes de engenharia de alto desempenho, onde possa contribuir com código limpo e evoluir constantemente na carreira de Engenharia de Software.",
-        "email": "allaffgustavo@gmail.com",
-        "linkedin": "https://linkedin.com/in/allaff",
-        "github": "https://github.com/allaff"
+        "about": "Desenvolvedor de Software com foco em Backend, apaixonado por transformar lógica complexa em aplicações eficientes e escaláveis. A minha experiência prática com Python e Django permite-me construir arquiteturas robustas e APIs RESTful, sempre com atenção à qualidade do código e performance. Tenho também competências em Frontend (React), o que me dá uma visão completa do ciclo de desenvolvimento (Full Stack). A minha formação técnica no IFPB deu-me a base sólida em lógica de programação, e a minha atuação como freelancer desenvolveu a minha autonomia e capacidade de resolver problemas reais de negócio. O meu objetivo é integrar equipes de engenharia de alto desempenho, onde possa contribuir com código limpo e evoluir constantemente na carreira de Engenharia de Software."
     },
+    "en": {
+        "role": "Full Stack Developer",
+        "about": "Software Developer focused on Backend, passionate about transforming complex logic into efficient and scalable applications. My hands-on experience with Python and Django allows me to build robust architectures and RESTful APIs, always focusing on code quality and performance. I also have skills in Frontend (React), which gives me a full view of the development cycle (Full Stack). My technical background at IFPB gave me a solid foundation in programming logic, and my work as a freelancer developed my autonomy and ability to solve real business problems. My goal is to join high-performance engineering teams, where I can contribute clean code and constantly evolve in my Software Engineering career."
+    }
+},
+    
     "skills": [
         "Full Stack Developer (Python Focus) | Django & React | Engenharia de Software e Soluções Web"
     ],
